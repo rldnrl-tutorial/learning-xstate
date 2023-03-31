@@ -1,8 +1,9 @@
 import { useMachine } from "@xstate/react";
 import { callMachine } from "./machine/call-machine";
+import { counterMachine } from "./machine/counter-machine";
 
 function App() {
-  const [state, send] = useMachine(callMachine, {
+  const [callState, sendCall] = useMachine(callMachine, {
     actions: {
       "Mute microphone": () => {
         alert("Microphone is mute");
@@ -13,10 +14,18 @@ function App() {
     },
   });
 
+  const [counterState, sendCounter] = useMachine(counterMachine);
+
   return (
     <div>
-      {state.nextEvents.map((event) => (
-        <button key={event} onClick={() => send(event)}>
+      <p>Counter: {counterState.context.count}</p>
+      {counterState.nextEvents.map((event) => (
+        <button key={event} onClick={() => sendCounter(event)}>
+          {event}
+        </button>
+      ))}
+      {callState.nextEvents.map((event) => (
+        <button key={event} onClick={() => sendCall(event)}>
           {event}
         </button>
       ))}
