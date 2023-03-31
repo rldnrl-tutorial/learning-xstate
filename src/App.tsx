@@ -13,19 +13,13 @@ function App() {
     },
   });
 
-  const handleMute = () => {
-    if (state.matches("Microphone.Muted")) {
-      send("Unmute");
-    } else if (state.matches("Microphone.Unmuted")) {
-      send("Mute");
-    }
-  };
-
   return (
     <div>
-      <button onClick={handleMute}>
-        {state.matches("Microphone.Muted") ? "Unmute" : "Mute"}
-      </button>
+      {state.nextEvents.map((event) => (
+        <button key={event} onClick={() => send(event)}>
+          {event}
+        </button>
+      ))}
     </div>
   );
 }
