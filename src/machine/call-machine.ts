@@ -16,7 +16,6 @@ export const callMachine = createMachine({
             },
           },
         },
-
         Unmuted: {
           on: {
             Mute: {
@@ -26,7 +25,6 @@ export const callMachine = createMachine({
           },
         },
       },
-
       initial: "Muted",
     },
     Video: {
@@ -42,7 +40,6 @@ export const callMachine = createMachine({
           },
         },
       },
-
       initial: "Showing video",
     },
   },

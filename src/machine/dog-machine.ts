@@ -26,7 +26,6 @@ export const dogMachine = createMachine({
             "Loud noise": "Scared",
           },
         },
-
         Scared: {},
         Begging: {
           on: {
@@ -37,7 +36,6 @@ export const dogMachine = createMachine({
           },
         },
       },
-
       initial: "Sleepy",
     },
   },
