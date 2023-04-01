@@ -18,10 +18,11 @@ function App() {
   const [counterState, sendCounter] = useMachine(counterMachine);
 
   const [authenticationState, sendAuthentication] = useMachine(
-    authenticationMachine, {
+    authenticationMachine,
+    {
       guards: {
-        "Error is timeout error": () => false
-      }
+        "Error is timeout error": () => false,
+      },
     }
   );
 
