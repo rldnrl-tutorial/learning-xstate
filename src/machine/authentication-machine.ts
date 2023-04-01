@@ -48,26 +48,21 @@ export const authenticationMachine = createMachine(
             },
           ],
         },
-
         on: {
           Cancel: "Cancelled",
         },
-
         after: {
           "1500": "Time out",
         },
       },
-
       "No Permission": {},
       Normal: {},
       Admin: {},
-
       "Time out": {
         on: {
           Retry: "Checking user permissions level",
         },
       },
-
       Cancelled: {},
     },
   },
