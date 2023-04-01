@@ -1,4 +1,5 @@
 import { useMachine } from "@xstate/react";
+import { authenticationMachine } from "./machine/authentication-machine";
 import { callMachine } from "./machine/call-machine";
 import { counterMachine } from "./machine/counter-machine";
 
@@ -16,6 +17,14 @@ function App() {
 
   const [counterState, sendCounter] = useMachine(counterMachine);
 
+  const [authenticationState, sendAuthentication] = useMachine(
+    authenticationMachine, {
+      guards: {
+        "Error is timeout error": () => false
+      }
+    }
+  );
+
   return (
     <div>
       <p>Counter: {counterState.context.count}</p>
@@ -26,6 +35,12 @@ function App() {
       ))}
       {callState.nextEvents.map((event) => (
         <button key={event} onClick={() => sendCall(event)}>
+          {event}
+        </button>
+      ))}
+      <pre>{JSON.stringify(authenticationState.value)}</pre>
+      {authenticationState.nextEvents.map((event) => (
+        <button key={event} onClick={() => sendAuthentication(event)}>
           {event}
         </button>
       ))}
